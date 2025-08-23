@@ -1,6 +1,12 @@
 import telebot
 from telebot import types
-import random
+import os
+import requests 
+
+# Удаляем вебхук перед запуском polling
+import requests
+TOKEN = os.getenv('BOT_TOKEN')
+requests.get(f'https://api.telegram.org/bot{TOKEN}/deleteWebhook')
 
 API_TOKEN = '8332015861:AAE5bTk5k0eyxb-GdPJy3dbxhOcoX9dOce4'
 bot = telebot.TeleBot(API_TOKEN)
@@ -114,8 +120,9 @@ def handle_help(message):
 def echo_all(message):
     bot.send_message(message.chat.id, "Я пока понимаю только команды и кнопки 😊 Напиши /start чтобы начать!")
 
-# ЗАПУСК БОТА
-# ЭТИ СТРОКИ ДОЛЖНЫ БЫТЬ СОВСЕМ БЕЗ ОТСТУПОВ (на уровне функций)
 print("🟢 Бот Nawi запущен и готов к работе!")
 print("👉 Перейди в Telegram и напиши /start своему боту")
-bot.polling(none_stop=True, interval=0)  # none_stop=True полезен для устойчивой работы
+
+# УДАЛИ ВЕБХУК ПЕРЕД ЗАПУСКОМ
+bot.remove_webhook()
+bot.polling(none_stop=True, interval=0)
