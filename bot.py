@@ -164,7 +164,7 @@ def start_bot():
 def start_flask():
     app.run(host='0.0.0.0', port=3600, debug=False, use_reloader=False)
 
-if name == '__main__':
+if __name__ == '__main__':
     print("🟢 Бот Nawi запущен и готов к работе!")
     print("👉 Перейди в Telegram и напиши /start своему боту")
     
@@ -174,3 +174,4 @@ if name == '__main__':
     
     # Запускаем Flask в основном потоке
     start_flask()
+
