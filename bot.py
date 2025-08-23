@@ -2,7 +2,7 @@ import telebot
 from telebot import types
 import os
 import requests 
-
+import random
 # Удаляем вебхук перед запуском polling
 import requests
 TOKEN = os.getenv('BOT_TOKEN')
@@ -125,4 +125,5 @@ print("👉 Перейди в Telegram и напиши /start своему бо�
 
 # УДАЛИ ВЕБХУК ПЕРЕД ЗАПУСКОМ
 bot.remove_webhook()
+
 bot.polling(none_stop=True, interval=0)
