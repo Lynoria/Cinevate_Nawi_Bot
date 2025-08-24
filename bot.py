@@ -161,14 +161,14 @@ class CinevateBot:
             async def start(self, update: 
             Update, context: 
             ContextTypes.DEFAULT_TYPE):
-        """Команда /start - главное меню"""
+               """Команда /start - главное меню"""
         user = update.effective_user
         
         # Сохраняем информацию о пользователе
-        if r:
-            user_key = self.get_user_key(user.id)
-            r.hset(user_key, mapping={
-                'id': user.id,
+        if self.redis_client:
+            user_key = 
+        self.get_user_key(user.id)
+            r.hset(user_key, mapping={'id': user.id,
                 'username': user.username or user.first_name,
                 'first_name': user.first_name,
                 'last_name': user.last_name or ''
@@ -964,5 +964,6 @@ async def main():
 
 if name == "__main__":
     asyncio.run(main())
+
 
 
