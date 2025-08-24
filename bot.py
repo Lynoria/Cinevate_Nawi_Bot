@@ -30,7 +30,7 @@ except redis.ConnectionError:
     r = None
 
 # Токен вашего бота
-BOT_TOKEN = os.environ.get('BOT_TOKEN', "YOUR_BOT_TOKEN_HERE")
+BOT_TOKEN = os.environ.get('BOT_TOKEN', "8332015861:AAE5bTk5k0eyxb-GdPJy3dbxhOcoX9dOce4")
 
 # База фильмов и сериалов
 MOVIES_DATABASE = {
@@ -962,3 +962,4 @@ async def main():
 
 if name == "__main__":
     asyncio.run(main())
+
