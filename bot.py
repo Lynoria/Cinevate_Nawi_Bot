@@ -1,4 +1,5 @@
 import telebot
+from telebot import apihelper
 from telebot import types 
 import os 
 import requests 
@@ -174,4 +175,31 @@ if __name__ == '__main__':
     
     # Запускаем Flask в основном потоке
     start_flask()
+
+if name == '__main__':
+    # Задержка для избежания конфликта при перезапуске на Render
+    time.sleep(5)  # Ждем 5 секунд перед стартом
+
+    # Запускаем бота с перехватом ошибок и автоматическим перезапуском
+    while True:
+        try:
+            print("Бот запускается...")
+            bot.infinity_polling()  # Или bot.polling(none_stop=True)
+            
+        except apihelper.ApiException as e:
+            # Ловим конкретно ошибки API Telegram
+            if e.error_code == 409:
+                # Самая важная обработка: конфликт с другим инстансом
+                print("Обнаружен другой запущенный экземпляр бота. Ожидание 10 секунд перед перезапуском...")
+                time.sleep(10)
+            else:
+                # Любая другая ошибка от API Telegram (например, проблемы с сетью)
+                print(f"Произошла ошибка Telegram API (код {e.error_code}): {e}. Перезапуск через 10 секунд.")
+                time.sleep(10)
+                
+        except Exception as e:
+            # Ловим ЛЮБЫЕ другие непредвиденные ошибки в коде
+            print(f"Произошла непредвиденная ошибка: {e}. Перезапуск через 10 секунд.")
+            time.sleep(10)
+
 
