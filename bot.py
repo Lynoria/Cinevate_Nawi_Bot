@@ -158,7 +158,9 @@ class CinevateBot:
                 return await update.callback_query.edit_message_text(text, **kwargs)
         except Exception as e:
             logger.error(f"Ошибка отправки сообщения: {e}")
-            return Noneasync def start(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+            async def start(self, update: 
+            Update, context: 
+            ContextTypes.DEFAULT_TYPE):
         """Команда /start - главное меню"""
         user = update.effective_user
         
@@ -962,4 +964,5 @@ async def main():
 
 if name == "__main__":
     asyncio.run(main())
+
 
